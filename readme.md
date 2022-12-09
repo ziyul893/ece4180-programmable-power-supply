@@ -54,10 +54,8 @@ The below information has been edited to reflect our backup project, but schemat
 * Type-C Cable 
 * Jumper Wires 
 
-## Schematic 
+## PCB Schematic and Layout
 ![schematic break out board](Schematic_ECE4180_USBPD_2022-12-09.svg)
-
-## PCB Layout
 ![pcbrender](PCB_PCB_ECE4180_USBPD_2022-12-09.svg)
 
 ## Background
@@ -77,6 +75,16 @@ However, the USB-C connector was holding some secrets: the CC and VCONN pins/lin
 These lines allow a power source, power sink, and the interconnecting cable to communicate with each other over a simple Biphase Mark Code (BMC) signal. In 2015, the first widespread revision of USB Power Delivery (USB-PD)
 was introduced: USB-PD 2.0. USB-PD allows power sources and sinks to negotiate voltages with each other, supporting up to 20V @ 5A (100W) with a supported cable. In 2021, an updated version of this standard, USB-PD 3.1, was released
 with support for Extended Power Range (EPR) voltages, which range from 20V to 48V, still at 5A, for a maximum theoretical power delivery capacity of 240W.
+
+## How It Works
+![ProtocolShot](ProtocolAnalyzer.png)
+
+With USB-PD, the source, sink, and cable (if E-marked) will communicate with each other to determine the maximum power transfer supported by all three. Each member of this group can query any other member for their capabilities.
+Shown above is the output of a protocol analyzer connected to the USB-C CC (Channel Configuration) lines on our project as we switch through the supported voltages. Here you can clearly see the handshake and negotiation process:
+
+The two purple "Vendor Defined" messages at the beginning is from the sink&source to the cable: The sink and source are querying the cable for its capabilities, and the cable responds with a packet containing its capabilities (in this case, 5A capable and 40Gbps capable). Then the the source (USB-C Laptop Charger) broadcasts its capabilities to the sink (our project) with a "Source Cap" message. The rightmost column shows the decoded bytes, and the supported operation modes of the source are enumerated.
+The sink analyzes the source capabilities and responds with an RDO (Request Data Object) with a specified voltage inside. The source accepts this request, and a few moments later, the bus voltage (VBUS) rises to the agreed-on setpoint. At this point, the
+source sends a PS_RDY (Power Supply Ready) message to the sink, which signals to the sink that it may begin to draw current.
 
 ## Source Code
 ```
