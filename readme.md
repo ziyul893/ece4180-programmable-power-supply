@@ -1,9 +1,9 @@
 # ECE 4180 Project: Programmable Power Supply 
 
-** Team member: Eric Shi, Ziyu Liu, Tomas Gowens **
-** Geogia Tech **
+**Team member: Eric Shi, Ziyu Liu, Tomas Gowens**
+**Geogia Tech**
 
-**Watch the Demo: **
+**Watch the Demo:**
 ## Table of Content 
 * [Project Description](#project-description)
 * [Repo Navigatation](#repo-navigation)
