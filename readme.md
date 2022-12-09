@@ -1,6 +1,6 @@
-# ECE 4180 Project: Programmable Power Supply 
+# ECE 4180 Project: USB-PD Variable Power Supply 
 
-**Team member: Eric Shi, Ziyu Liu, Tomas Gowens**
+**Team members: Eric Shi, Ziyu Liu, Tomas Gowens**
 
 **Geogia Tech**
 
@@ -19,17 +19,19 @@ https://www.youtube.com/watch?v=Ixi4_sykFqE
 
 
 ## Project Description
-The project is inspired from PD trigger that is avalibale request different voltages with I/O control. While PD Controller is widely available on market. However, those devices have doesn't have monitor to show the real output of voltage of current. Out project is trying to solve this issue. An add-on display is integrated in our project to demonstrate requested voltage (V_req), measured voltage (V_meas), measure current (I_meas).
+Our goal was to create a mini "benchtop-style" power supply that offloads the voltage and current regulation to a USB Power Delivery compliant AC-DC adapter. This allows our power supply unit to be compact and efficient, allowing it to be very portable.
+Most USB-C laptop chargers support all the voltage ranges supported with our project. Our project currently supports 5V, 9V, 12V, 15V, and 20V outputs.
 
-It is a mini “benchtop-style” variable voltage power supply that is powered by a
-standard USB-C PD-enabled AC to DC adapter. The unit should be able to output [5V, 9V, 12V, 15V,
-20V]. The device will include an mbed-enabled microcontroller (LPC1768, STM32F4-Series, or
-STM32F7-Series), which will connect to an LCD screen via UART, the USB-C PHY controller via
-I2C, buttons or an RPG with GPIO, and status LEDs with PWM-enabled GPIO. The screen will
-display the output voltage and current. This project will most likely require the creation of a custom
-PCB. We may use an additional small IC such as the Atmega32u4 as a coprocessor to hardware
-offload specialized functions such as USB-C CC/PD communications.
+Our project is inspired from the lab bench power supplies available in Electrical Engineering Labratories: it's nice to be able to produce any desired voltage on-demand. This greatly speeds up the testing and debugging of circuits.
+As college students with modern laptops, all of the team members already carry around efficient USB-C PD chargers that have extremely high power densities. Why not tap into this to build a portable "benchtop" power supply?
 
+The project incorperates a Texas Instruments INA260 Digital Current/Voltage/Power monitor. This allows us to accurately sense output voltage and current and present that information on a readout, just like with a real benchtop supply.
+We use an OnSemi FUSB302B as our USB-C PHY port controller. The FUSB302B has an I2C interface to the host, which allows us to manage the PHY in software.
+We use an Atmel Atmega 32U4 as a dedicated coprocessor to handle communications with the PHY and manage the USB-CC communication link. A serial interface is used between the Atmega 32U4 and the mBed.
+A uLCD-144G2 LCD display is used to display relevant information to the user. The LCD is connected to the mBed via UART connection.
+A software deboucned button (via PinDetect) is used as a human interface to allow voltage selection.
+
+**UPDATE: Tightened COVID policy in China has delayed the shipment of our PCB. We have since assembled a project with identical functionality using off-the-shelf parts on a breadboard.
 ## Repo Navigation
 [4DGL-uLCD-SE](4DGL-uLCD-SE), [INA260](INA260), [mbed](mbed) are three library folders that include required API for this project. 
 
