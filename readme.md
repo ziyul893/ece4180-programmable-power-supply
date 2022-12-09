@@ -63,6 +63,21 @@ The below information has been edited to reflect our backup project, but schemat
 ## Background
 ![USBPDHistory](USBPDHistory.png)
 
+When USB was first introduced, it was intended to be a general-purpose data bus. Power delivery was not seriously considered in USB's original conception.
+USB revisions prior to and including USB 2.0 were able to deliver 500mA @ 5V for connected devices (2.5W). This is enough power to power a mouse or keyboard, but not enough power to charge batteries.
+When USB 3.0 was introduced in 2008, the 500mA current capability was increased to 900mA, allowing for 4.5W of power delivery. This allowed some higher-power devices such as bus-powered hard drives to operate.
+
+To address the growing demand on the power capabilities of the USB connector as mobile smartphones proliferated through the market, in 2010, the USB Battery Charging (BC) 1.2
+specification was released. USB BC 1.2 uses the same USB-A connector as all generations of USB prior to and including USB 3.0. USB BC 1.2 added support for a 1.5A Charging Downstream Port (CDP)
+mode, allowing for 7.5W of power to be drawn by a connected device. This was the standard for a long time, all the way until 2014.
+
+In 2014, the USB-C connctor was debuted, and it natively supported a 3A mode, still at 5V, allowing for up to 15W of power to be sourced.
+However, the USB-C connector was holding some secrets: the CC and VCONN pins/lines in the connector.
+
+These lines allow a power source, power sink, and the interconnecting cable to communicate with each other over a simple Biphase Mark Code (BMC) signal. In 2015, the first widespread revision of USB Power Delivery (USB-PD)
+was introduced: USB-PD 2.0. USB-PD allows power sources and sinks to negotiate voltages with each other, supporting up to 20V @ 5A (100W) with a supported cable. In 2021, an updated version of this standard, USB-PD 3.1, was released
+with support for Extended Power Range (EPR) voltages, which range from 20V to 48V, still at 5A, for a maximum theoretical power delivery capacity of 240W.
+
 ## Source Code
 ```
 #include "mbed.h"
@@ -228,4 +243,5 @@ int main() {
 }
 ```
 ## Future Work
-Due to the scope of the project, we only made the power supply support 5, 9, 12, 15, 20V. In the future, we want to integrate some analog voltage regulator to the break out unit in order to enable to fine control, or the PPS (Programmable Power Supply). Ideally, we want the future work to have a 20mV increment step, therefore, the power supply become more accurate. 
+Our power supply currently only supports 5, 9, 12, 15, 20V Fixed PDO output. In the future we plan to implement support for USB-PD PPS (Programmable Power Supply), which would allow us to output from 3.3V to 21V with 200mV resolution.
+This would also enable us to perform output current regulation from 0A to 5A with 50mA resolution. In this case, we would most likely replace the button with a Rotary Pulse Generator (RPG) or linear potentiometer to allow fine adjustments.
