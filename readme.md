@@ -37,6 +37,7 @@ offload specialized functions such as USB-C CC/PD communications.
 * LCD Display: uLCD-144G2
 
 ## Schematic 
+![schematic break out board](Schematic_ECE4180_USBPD_2022-12-01.svg)
 
 ## Connection Guide
 
