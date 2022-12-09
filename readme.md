@@ -28,7 +28,7 @@ PCB. We may use an additional small IC such as the Atmega32u4 as a coprocessor t
 offload specialized functions such as USB-C CC/PD communications.
 
 ## Repo Navigation
-[4DGL-uLCD-SE](4DGL-uLCD-SE), [INA260](INA260), [mbed](mbed)are three library folders that include required API for this project. 
+[4DGL-uLCD-SE](4DGL-uLCD-SE), [INA260](INA260), [mbed](mbed) are three library folders that include required API for this project. 
 
 [main.cpp](main.cpp) contains the main logic of controlling the mini power supply using mbed command.
 
@@ -53,9 +53,7 @@ offload specialized functions such as USB-C CC/PD communications.
 #include "uLCD_4DGL.h"
 #include "PinDetect.h"
 
-// Host PC Communication channels
-// Serial pc(USBTX, USBRX); // tx, rx. For debugging 
-// i2c setup
+
 I2C i2c(p28, p27);
 INA260 VCmonitor(i2c);
 DigitalIn ALT(p29);            // Alert pin
@@ -154,16 +152,11 @@ int main() {
     led2 = 0;
     led3 = 0;
     led4 = 0;
+
     double V, C, P;
     int count = 1;
     // Sets 4 samples average and sampling time for voltage and current to 8.244ms
     VCmonitor.setConfig(0x0600 | 0x01C0 | 0x0038 | 0x0007); // INA260_CONFIG_AVGRANGE_64|INA260_CONFIG_BVOLTAGETIME_8244US|INA260_CONFIG_SCURRENTTIME_8244US|INA260_CONFIG_MODE_SANDBVOLT_CONTINUOUS
-//    Debugging output
-//    pc.printf("INA260 TEST!\n");
-//    pc.printf(""__DATE__
-//              " , "__TIME__
-//              "\n");
-//    pc.printf("%d Config register\n", 0x0600 | 0x01C0 | 0x0038 | 0x0007); // prints the COnfig reg value to PC COM port
     VCmonitor.setAlert(0x8001);                                           // set current value as alert, latch alert pin
     VCmonitor.setLim(0x8);                                                // set limit to 10mA (10/1.25)
 
@@ -188,9 +181,7 @@ int main() {
         }
         
         // get ina260 settings0
-        if ((VCmonitor.getVoltage(&V) == 0) && (VCmonitor.getCurrent(&C) == 0) && (VCmonitor.getPower(&P) == 0))
-        {
-            // pc.printf("%d,V,%f,C,%f,P,%f\n",count,V,C,P);
+        if ((VCmonitor.getVoltage(&V) == 0) && (VCmonitor.getCurrent(&C) == 0) && (VCmonitor.getPower(&P) == 0)) {
             uLCD.text_width(2);
             uLCD.text_height(2);
             uLCD.locate(0, 0);
