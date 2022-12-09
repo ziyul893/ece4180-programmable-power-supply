@@ -20,6 +20,8 @@ https://www.youtube.com/watch?v=Ixi4_sykFqE
 
 ## Project Description
 Our goal was to create a mini "benchtop-style" power supply that offloads the voltage and current regulation to a USB Power Delivery compliant AC-DC adapter. This allows our power supply unit to be compact and efficient, allowing it to be very portable.
+We have created a custom PCB to implement our project. 
+
 Most USB-C laptop chargers support all the voltage ranges supported with our project. Our project currently supports 5V, 9V, 12V, 15V, and 20V outputs.
 
 Our project is inspired from the lab bench power supplies available in Electrical Engineering Labratories: it's nice to be able to produce any desired voltage on-demand. This greatly speeds up the testing and debugging of circuits.
@@ -31,7 +33,9 @@ We use an Atmel Atmega 32U4 as a dedicated coprocessor to handle communications 
 A uLCD-144G2 LCD display is used to display relevant information to the user. The LCD is connected to the mBed via UART connection.
 A software deboucned button (via PinDetect) is used as a human interface to allow voltage selection.
 
-**UPDATE: Tightened COVID policy in China has delayed the shipment of our PCB. We have since assembled a project with identical functionality using off-the-shelf parts on a breadboard.
+**UPDATE: Tightened COVID policy in China has delayed the shipment of our PCB. We have since assembled a project with identical functionality using off-the-shelf parts on a breadboard as a contingency plan.
+The below information has been edited to reflect our backup project, but schematics and PCB layouts for the original PCB were left in place.
+
 ## Repo Navigation
 [4DGL-uLCD-SE](4DGL-uLCD-SE), [INA260](INA260), [mbed](mbed) are three library folders that include required API for this project. 
 
@@ -56,7 +60,8 @@ A software deboucned button (via PinDetect) is used as a human interface to allo
 ## PCB Layout
 ![pcbrender](PCB_PCB_ECE4180_USBPD_2022-12-09.svg)
 
-## Connection Guide
+## Background
+![USBPDHistory](USBPDHistory.png)
 
 ## Source Code
 ```
