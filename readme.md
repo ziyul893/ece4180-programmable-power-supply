@@ -45,44 +45,13 @@ offload specialized functions such as USB-C CC/PD communications.
 
 ## Source Code
 ```
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@zxl893 
-zxl893
-/
-ece4180-programmable-power-supply
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-ece4180-programmable-power-supply/main.cpp
-@wirelessnet2
-wirelessnet2 Updated code with arbitrary control
-Latest commit aed4521 10 minutes ago
- History
- 2 contributors
-@wirelessnet2@zxl893
-172 lines (139 sloc)  3.6 KB
-
 #include "mbed.h"
 #include "INA260.hpp"
 #include "uLCD_4DGL.h"
 #include "PinDetect.h"
 
 // Host PC Communication channels
-//Serial pc(USBTX, USBRX); // tx, rx
+// Serial pc(USBTX, USBRX); // tx, rx. For debugging 
 // i2c setup
 I2C i2c(p28, p27);
 INA260 VCmonitor(i2c);
@@ -186,6 +155,7 @@ int main() {
     int count = 1;
     // Sets 4 samples average and sampling time for voltage and current to 8.244ms
     VCmonitor.setConfig(0x0600 | 0x01C0 | 0x0038 | 0x0007); // INA260_CONFIG_AVGRANGE_64|INA260_CONFIG_BVOLTAGETIME_8244US|INA260_CONFIG_SCURRENTTIME_8244US|INA260_CONFIG_MODE_SANDBVOLT_CONTINUOUS
+//    Debugging output
 //    pc.printf("INA260 TEST!\n");
 //    pc.printf(""__DATE__
 //              " , "__TIME__
