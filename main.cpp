@@ -1,26 +1,24 @@
-/* INA260 test app*/
-
+// library 
 #include "mbed.h"
 #include "INA260.hpp"
 #include "uLCD_4DGL.h"
 
-// Host PC Communication channels
-Serial pc(USBTX, USBRX); // tx, rx
-//i2c setup
-I2C i2c(p28,p27);
-INA260 VCmonitor(i2c); 
-DigitalIn ALT(p29); //Alert pin
+// Objects 
+Serial pc(USBTX, USBRX); // tx, rx. pc communication channel
+I2C i2c(p28,p27);       // i2c setup
+INA260 VCmonitor(i2c);  // Create INA260 object 
+DigitalIn ALT(p29);     // Alert pin
 uLCD_4DGL uLCD(p13,p14,p12); // serial tx, serial rx, reset pin;
 
 int main() { 
-
     double V,C,P;
     int count = 1;  
     // Sets 4 samples average and sampling time for voltage and current to 8.244ms
     VCmonitor.setConfig(0x0600 | 0x01C0 | 0x0038 | 0x0007); //INA260_CONFIG_AVGRANGE_64|INA260_CONFIG_BVOLTAGETIME_8244US|INA260_CONFIG_SCURRENTTIME_8244US|INA260_CONFIG_MODE_SANDBVOLT_CONTINUOUS
+    // Debugging output on serial port 
     pc.printf("INA260 TEST!\n");
     pc.printf(""__DATE__" , "__TIME__"\n");
-    pc.printf("%d Config register\n",0x0600 | 0x01C0 | 0x0038 | 0x0007); //prints the COnfig reg value to PC COM port
+    pc.printf("%d Config register\n",0x0600 | 0x01C0 | 0x0038 | 0x0007); //prints the Config reg value to PC COM port
     VCmonitor.setAlert(0x8001); //set current value as alert, latch alert pin
     VCmonitor.setLim(0x8); //set limit to 10mA (10/1.25)
 
@@ -40,16 +38,14 @@ int main() {
         uLCD.printf("---------");
         
 while(1)
-{
-
-         
-         //get ina260 settings0
+{   
+         // Get INA260 reading values 
          if((VCmonitor.getVoltage(&V) == 0) && (VCmonitor.getCurrent(&C) == 0) && (VCmonitor.getPower(&P) == 0))
          {
-             //pc.printf("%d,V,%f,C,%f,P,%f\n",count,V,C,P);
-             uLCD.text_width(2);     
+            uLCD.text_width(2);     
             uLCD.text_height(2);
             uLCD.color(WHITE);
+            // Print requested V 
             if (V <= 6.5) {
                 uLCD.locate(0,1);
                 uLCD.printf("\r5 V ");
@@ -71,6 +67,7 @@ while(1)
                 uLCD.printf("\r20 V ");
             }
             
+            // Print measured V and I
             uLCD.text_width(2);     
             uLCD.text_height(2);
             uLCD.locate(0,4);
@@ -82,6 +79,9 @@ while(1)
          }
          count++;
          
+         /*The overcurrent altert portion. Excluded from the demo but you can enable that. 
+         The current is limited to 10mA as set in the previous code*/ 
+
          //if(ALT==0)
          //{
          //   pc.printf("Overcurrent!!!!");  
