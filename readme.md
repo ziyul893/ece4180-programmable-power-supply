@@ -86,6 +86,8 @@ The two purple "Vendor Defined" messages at the beginning is from the sink&sourc
 The sink analyzes the source capabilities and responds with an RDO (Request Data Object) with a specified voltage inside. The source accepts this request, and a few moments later, the bus voltage (VBUS) rises to the agreed-on setpoint. At this point, the
 source sends a PS_RDY (Power Supply Ready) message to the sink, which signals to the sink that it may begin to draw current.
 
+This process repeats each time the sink changes its requested voltage.
+
 ## Source Code
 ```
 #include "mbed.h"
