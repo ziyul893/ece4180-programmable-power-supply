@@ -10,6 +10,7 @@
 * [Repo Navigatation](#repo-navigation)
 * [Parts List](#parts-list)
 * [Schematic](#shcematic)
+* [PCB Layout](#pcb-layout)
 * [Connection Guide](#connection-guide)
 * [Source Code](#source-code)
 * [Future Work](#future-work)
@@ -36,7 +37,14 @@ offload specialized functions such as USB-C CC/PD communications.
 
 ## Parts List 
 * Mbed LPC1768
-* LCD Display: uLCD-144G2
+* LC Display: uLCD-144G2
+* INA260 Current Sensor 
+* PD Trigger 
+* 3 Relays 
+* 2 Power MOSFET
+* External Load Power Resistor
+* Type-C Cable 
+* Jumper Wires 
 
 ## Schematic 
 ![schematic break out board](Schematic_ECE4180_USBPD_2022-12-09.svg)
@@ -211,4 +219,4 @@ int main() {
 }
 ```
 ## Future Work
-Due to the scope of the project, we only made the power supply support 5,9, 12, 15, 20V. In the future, we want to integrate some analog voltage regulator to the break out unit in order to enable to fine control. Ideally, we want the future work to have a 20mV increment step, therefore, the power supply become more accurate. 
+Due to the scope of the project, we only made the power supply support 5, 9, 12, 15, 20V. In the future, we want to integrate some analog voltage regulator to the break out unit in order to enable to fine control, or the PPS (Programmable Power Supply). Ideally, we want the future work to have a 20mV increment step, therefore, the power supply become more accurate. 
