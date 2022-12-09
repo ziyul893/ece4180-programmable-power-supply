@@ -30,7 +30,7 @@ offload specialized functions such as USB-C CC/PD communications.
 ## Repo Navigation
 [4DGL-uLCD-SE](4DGL-uLCD-SE), [INA260](INA260), [mbed](mbed)are three library folders that include required API for this project. 
 
-[main.cpp ](main.cpp) contains the main logic of controlling the mini power supply using mbed command.
+[main.cpp](main.cpp) contains the main logic of controlling the mini power supply using mbed command.
 
 [Schematic](Schematic_ECE4180_USBPD_2022-12-01.svg) shows the layout of the project's customized break out board. 
 
@@ -39,7 +39,10 @@ offload specialized functions such as USB-C CC/PD communications.
 * LCD Display: uLCD-144G2
 
 ## Schematic 
-![schematic break out board](Schematic_ECE4180_USBPD_2022-12-01.svg)
+![schematic break out board](Schematic_ECE4180_USBPD_2022-12-09.svg)
+
+## PCB Layout
+![pcbrender](PCB_PCB_ECE4180_USBPD_2022-12-09.svg)
 
 ## Connection Guide
 
