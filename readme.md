@@ -74,14 +74,14 @@ This process repeats each time the sink changes its requested voltage.
 [Schematic](Schematic_ECE4180_USBPD_2022-12-01.svg) shows the layout of the project's customized break out board. 
 
 ## Parts List 
-* Mbed LPC1768
-* LC Display: uLCD-144G2
-* INA260 Current Sensor 
+* [Mbed LPC1768](https://www.nxp.com/products/processors-and-microcontrollers/arm-microcontrollers/general-purpose-mcus/lpc1700-arm-cortex-m3/arm-mbed-lpc1768-board:OM11043)
+* [LC Display: uLCD-144G2](https://4dsystems.com.au/ulcd-144-g2)
+* [INA260 Current Sensor](https://www.ti.com/product/INA260)
 * PD Trigger 
 * 1 1000uF and 1 1uF Capacitor
 * 3 Diodes
 * 3 Relays 
-* 2 Sparkfun Power MOSFET Breakout 
+* [2 Sparkfun Power MOSFET Breakout ](https://www.sparkfun.com/products/12959)
 * 1 Push Button
 * 1 NPN BJT (BC547)
 * Resistors 
@@ -95,11 +95,14 @@ This process repeats each time the sink changes its requested voltage.
 
 ## Connection Guide 
 This is the block diagram of our project:
-
+![wiring](wiring.png)
 This is how the actual build up looks like:
 ![breadboard](breadboard-wiring.jpeg)
 
-The updated version with our customized PCB will be included once shipping become available again. 
+The block diagram and the breadbaoard design should have the same functionality, except, the block diagram is built by out-of-shelf components. The mean components are mbed (I/O interface), uLCD (display), INA260(current sensor), and PD trigger (pull voltage request). Power MOSFET, relay, capacitors, diodes, resistors were used to regulate the voltage and drive the circuit. The connection of the them can refer to the data sheet of the listed components. For the specific connection of relay and mosfet, referring to the [mbed driver webpage](https://os.mbed.com/users/4180_1/notebook/relays1/) could be helpful. 
+
+This project include both PCB design and the available component inbtegration due to the delay of PCB shippping. We also indluded the PCB design schematic in this repository, and we may upload a new version of demo once the unit is ready. 
+
 ## Source Code
 ```
 #include "mbed.h"
@@ -266,4 +269,5 @@ int main() {
 ```
 ## Future Work
 Our power supply currently only supports 5, 9, 12, 15, 20V Fixed PDO output. In the future we plan to implement support for USB-PD PPS (Programmable Power Supply), which would allow us to output from 3.3V to 21V with 200mV resolution.
+
 This would also enable us to perform output current regulation from 0A to 5A with 50mA resolution. In this case, we would most likely replace the button with a Rotary Pulse Generator (RPG) or linear potentiometer to allow fine adjustments.
