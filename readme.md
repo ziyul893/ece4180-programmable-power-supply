@@ -101,8 +101,7 @@ This is how the actual build up looks like:
 
 The block diagram and the breadbaoard design should have the same functionality, except, the block diagram is built by out-of-shelf components. The mean components are mbed (I/O interface), uLCD (display), INA260(current sensor), and PD trigger (pull voltage request). Power MOSFET, relay, capacitors, diodes, resistors were used to regulate the voltage and drive the circuit. The connection of the them can refer to the data sheet of the listed components. For the specific connection of relay and mosfet, referring to the [mbed driver webpage](https://os.mbed.com/users/4180_1/notebook/relays1/) could be helpful. 
 
-This project include both PCB design and the available component inbtegration due to the delay of PCB shippping. We also indluded the PCB design schematic in this repository, and we may upload a new version of demo once the unit is ready. 
-
+This project include both PCB design and the available component inbtegration due to the delay of PCB shippping. We also included the PCB design schematic in this repository and you can use it as another connection guide. Once the new version become avaliable, we may upload the new picture and demo. 
 ## Source Code
 ```
 #include "mbed.h"
