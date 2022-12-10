@@ -18,16 +18,17 @@ https://www.youtube.com/watch?v=Ixi4_sykFqE
 * [Future Work](#future-work)
 
 ## Project Description
-Our goal was to create a mini "benchtop-style" power supply that offloads the voltage and current regulation to a USB Power Delivery compliant AC-DC adapter. This allows our power supply unit to be compact and efficient, allowing it to be very portable.
-We have created a custom PCB to implement our project. 
+Our project is inspired from the lab bench power supplies available in Electrical Engineering Labratories: it's nice to be able to produce any desired voltage on-demand. This greatly speeds up the testing and debugging of circuits. As college students with modern laptops, all of the team members already carry around efficient USB-C PD chargers that have extremely high power densities. Why not tap into this to build a portable "benchtop" power supply?
+
+Our goal was to create a mini "benchtop-style" power supply that offloads the voltage and current regulation to a USB Power Delivery compliant AC-DC adapter. This allows our power supply unit to be compact and efficient, allowing it to be very portable. Here is a picture of traditional power supply. 
+![Power Supply](power-supply.png)
+
+To achieve the goal, we have created a custom PCB to implement our project. 
 
 Most USB-C laptop chargers support all the voltage ranges supported with our project. Our project currently supports 5V, 9V, 12V, 15V, and 20V outputs.
 
-Our project is inspired from the lab bench power supplies available in Electrical Engineering Labratories: it's nice to be able to produce any desired voltage on-demand. This greatly speeds up the testing and debugging of circuits.
-As college students with modern laptops, all of the team members already carry around efficient USB-C PD chargers that have extremely high power densities. Why not tap into this to build a portable "benchtop" power supply?
-
 The project incorperates a Texas Instruments INA260 Digital Current/Voltage/Power monitor. This allows us to accurately sense output voltage and current and present that information on a readout, just like with a real benchtop supply.
-We use an OnSemi FUSB302B as our USB-C PHY port controller. The FUSB302B has an I2C interface to the host, which allows us to manage the PHY in software.
+We use an [OnSemi FUSB302B ](https://www.onsemi.com/products/interfaces/usb-type-c/fusb302b)as our USB-C PHY port controller. The FUSB302B has an I2C interface to the host, which allows us to manage the PHY in software.
 We use an Atmel Atmega 32U4 as a dedicated coprocessor to handle communications with the PHY and manage the USB-CC communication link. A serial interface is used between the Atmega 32U4 and the mBed.
 A uLCD-144G2 LCD display is used to display relevant information to the user. The LCD is connected to the mBed via UART connection.
 A software deboucned button (via PinDetect) is used as a human interface to allow voltage selection.
@@ -46,7 +47,7 @@ When USB 3.0 was introduced in 2008, the 500mA current capability was increased 
 To address the growing demand on the power capabilities of the USB connector as mobile smartphones proliferated through the market, in 2010, the USB Battery Charging (BC) 1.2
 specification was released. USB BC 1.2 uses the same USB-A connector as all generations of USB prior to and including USB 3.0. USB BC 1.2 added support for a 1.5A Charging Downstream Port (CDP)
 mode, allowing for 7.5W of power to be drawn by a connected device. This was the standard for a long time, all the way until 2014.
-
+![type c](type-c.png)
 In 2014, the USB-C connctor was debuted, and it natively supported a 3A mode, still at 5V, allowing for up to 15W of power to be sourced.
 However, the USB-C connector was holding some secrets: the CC and VCONN pins/lines in the connector.
 
