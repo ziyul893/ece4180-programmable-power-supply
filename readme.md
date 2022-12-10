@@ -97,7 +97,7 @@ This process repeats each time the sink changes its requested voltage.
 This is the block diagram of our project:
 ![wiring](wiring.png)
 This is how the actual build up looks like:
-![breadboard](breadboard-wiring.jpeg)
+![breadboard](breadboard-wiring.jpg)
 
 The block diagram and the breadbaoard design should have the same functionality, except, the block diagram is built by out-of-shelf components. The mean components are mbed (I/O interface), uLCD (display), INA260(current sensor), and PD trigger (pull voltage request). Power MOSFET, relay, capacitors, diodes, resistors were used to regulate the voltage and drive the circuit. The connection of the them can refer to the data sheet of the listed components. For the specific connection of relay and mosfet, referring to the [mbed driver webpage](https://os.mbed.com/users/4180_1/notebook/relays1/) could be helpful. 
 
